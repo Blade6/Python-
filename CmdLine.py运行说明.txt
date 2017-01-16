@@ -1,0 +1,1 @@
+cmd窗口下进Python目录，然后python CmdLine.py first 2nd 3rd就能执行，注意CmdLine.py其实就是script
