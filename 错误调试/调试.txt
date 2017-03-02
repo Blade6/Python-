@@ -1,0 +1,66 @@
+方法一：用print把可能有问题的变量打印出来看看
+优点：简单粗暴有效
+缺点：大量的print将来还要删除，要用的时候又加上去，各种麻烦
+
+
+方法二：凡是用print来辅助查看的地方，都可以用断言（assert）来替代
+def foo(s):
+    n = int(s)
+    assert n != 0, 'n is zero!'
+    return 10 / n
+def main():
+    foo('0')
+assert的意思是，表达式n != 0应该是True，否则，后面的代码就会出错。
+如果断言失败，assert语句本身就会抛出AssertionError
+
+优点：启动Python解释器时可以用-O参数来关闭assert：
+$ python -O err.py
+关闭后，你可以把所有的assert语句当成pass来看
+缺点：比print好不到哪去
+
+
+方法三：把print替换为logging
+import logging
+logging.basicConfig(level=logging.INFO)
+s = '0'
+n = int(s)
+logging.info('n = %d' % n)
+print 10 / n
+优点：它允许你指定记录信息的级别，有debug，info，warning，error等几个级别，当我们指定level=INFO时，logging.debug就不起作用了。同理，指定level=WARNING后，debug和info就不起作用了。这样一来，你可以放心地输出不同级别的信息，也不用删除，最后统一控制输出哪个级别的信息。
+通过简单的配置，一条语句可以同时输出到不同的地方，比如console和文件
+
+
+方法四：启动Python的调试器pdb，让程序以单步方式运行，可以随时查看运行状态
+# err.py
+s = '0'
+n = int(s)
+print 10 / n
+
+$ python -m pdb err.py
+输入命令l来查看代码
+输入命令n可以单步执行代码
+任何时候都可以输入命令p 变量名来查看变量
+输入命令q结束调试，退出程序
+
+缺点：慢
+
+
+方法五：用pdb，但是不需要单步执行，我们只需要import pdb，然后，在可能出错的地方放一个pdb.set_trace()，就可以设置一个断点
+# err.py
+import pdb
+
+s = '0'
+n = int(s)
+pdb.set_trace() # 运行到这里会自动暂停
+print 10 / n
+
+运行代码，程序会自动在pdb.set_trace()暂停并进入pdb调试环境，可以用命令p查看变量，或者用命令c继续运行
+
+缺点：比方法四只快了一点点而已
+
+
+方法六：比较爽地设置断点、单步执行，就需要一个支持调试功能的IDE。目前比较好的Python IDE有PyCharm
+
+
+
+总结：虽然用IDE调试起来比较方便，但是最后你会发现，logging才是终极武器。

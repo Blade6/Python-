@@ -28,3 +28,12 @@ print d
 #list与之正相反
 
 #dict的key必须是不可变的，所以不能是list
+
+my_dict = {
+    "Name": "Guido",
+    "Age": 46,
+    "BDFL": True
+}
+print my_dict.items()
+print my_dict.keys()
+print my_dict.values()

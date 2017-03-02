@@ -31,3 +31,7 @@ print_board(board)
 # O O O O O
 # O O O O O
 # O O O O O
+
+choices = ['pizza', 'pasta', 'salad', 'nachos']
+for index, item in enumerate(choices):
+	print index, item

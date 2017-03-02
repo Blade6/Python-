@@ -37,3 +37,7 @@ I'll do a list:
 """
 
 print fat_cat
+
+text = "this hack is wack hack"
+lis = text.split()
+# ['this', 'hack', 'is', 'wack', 'hack']

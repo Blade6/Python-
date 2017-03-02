@@ -5,7 +5,9 @@ print int('12345')
 # 12345
 print int('12345',base=8)
 # 5349
-# base值设定输出为8进制，默认为10进制输出
+# base值设定输入为8进制，默认为10进制输入
+# 输出的都是10进制数
+# 第一个参数必须是字符串，如果带base的话。
 
 # def int2(x,base=2):
 # 	return int(x,base)
